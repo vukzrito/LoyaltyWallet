@@ -1,15 +1,21 @@
-import { Button, Text } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+import { Text } from '@react-navigation/elements';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { } from 'react-native-gesture-handler';
+import { Card } from '../../model/card';
+import { ListItemCard } from '../../components/list-item-card';
+import { useNavigation } from '@react-navigation/native';
+import { CardsService } from '../../service/cards.service';
 
 export function Home() {
+  const [cards, setCards] = useState<Card[]>([]);
+  useEffect(() => {
+    CardsService.getCards().then(c => setCards(c))
+  }, [])
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button screen="Profile" params={{ user: 'jane' }}>
-        Go to Profile
-      </Button>
-      <Button screen="Settings">Go to Settings</Button>
+
+      <FlatList numColumns={2} data={cards} renderItem={({ item }) => <ListItemCard card={item} />} />
     </View>
   );
 }
@@ -17,8 +23,7 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     gap: 10,
   },
+  list: {}
 });

@@ -3,9 +3,10 @@ import { HeaderButton, Text } from '@react-navigation/elements';
 import {
   createStaticNavigation,
   StaticParamList,
+  useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image } from 'react-native';
+import { Image, Touchable, TouchableOpacity, View } from 'react-native';
 import bell from '../assets/bell.png';
 import newspaper from '../assets/newspaper.png';
 import { Home } from './screens/Home';
@@ -13,13 +14,30 @@ import { Profile } from './screens/Profile';
 import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
+import { CardDetail } from './screens/CardDetail';
+import { AddCard } from './screens/AddCard';
+import AntDesignIcon from "@expo/vector-icons/AntDesign";
+import { StoreLookupList } from './screens/StoreLookupList';
 
 const HomeTabs = createBottomTabNavigator({
   screens: {
     Home: {
       screen: Home,
       options: {
-        title: 'Feed',
+        header: () => {
+          const navigation = useNavigation();
+          return (<View>
+            <TouchableOpacity
+              style={{ padding: 16, backgroundColor: 'transparent', alignItems: 'flex-end' }}
+              onPress={() => navigation.navigate('StoreLookup',)}>
+              <AntDesignIcon
+                name="pluscircle"
+                size={32}
+                color="#000"
+              />
+            </TouchableOpacity>
+          </View>)
+        }, // Hide the header for the Home tab
         tabBarIcon: ({ color, size }) => (
           <Image
             source={newspaper}
@@ -82,6 +100,22 @@ const RootStack = createNativeStackNavigator({
         ),
       }),
     },
+    CardDetails: {
+      screen: CardDetail
+    },
+    StoreLookup: {
+      screen: StoreLookupList
+    },
+    AddCard: {
+      screen: AddCard,
+      options: ({ navigation }) => ({
+        title: 'Add Card', headerRight: () => (
+          <HeaderButton onPress={navigation.goBack}>
+            <Text>Close</Text>
+          </HeaderButton>
+        )
+      }),
+    },
     NotFound: {
       screen: NotFound,
       options: {
@@ -100,6 +134,6 @@ type RootStackParamList = StaticParamList<typeof RootStack>;
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
