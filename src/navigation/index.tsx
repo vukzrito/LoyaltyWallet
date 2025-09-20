@@ -14,11 +14,29 @@ import { Profile } from './screens/Profile';
 import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
+import { Login } from './screens/Login';
 import { CardDetail } from './screens/CardDetail';
 import { AddCard } from './screens/AddCard';
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import { StoreLookupList } from './screens/StoreLookupList';
-
+import { COLORS } from '../constants';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+const HomeHeaderButton=()=>{
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+  return (
+    <View style={{paddingTop: insets.top,backgroundColor: COLORS.white}}>
+    <TouchableOpacity
+      style={{ padding: 16,paddingTop:0,alignItems: 'flex-end' }}
+      onPress={() => navigation.navigate('StoreLookup',)}>
+      <AntDesignIcon
+        name="pluscircle"
+        size={32}
+        color={COLORS.primary}
+      />
+    </TouchableOpacity></View>
+  )
+}
 const HomeTabs = createBottomTabNavigator({
   screens: {
     Home: {
@@ -26,17 +44,7 @@ const HomeTabs = createBottomTabNavigator({
       options: {
         header: () => {
           const navigation = useNavigation();
-          return (<View>
-            <TouchableOpacity
-              style={{ padding: 16, backgroundColor: 'transparent', alignItems: 'flex-end' }}
-              onPress={() => navigation.navigate('StoreLookup',)}>
-              <AntDesignIcon
-                name="pluscircle"
-                size={32}
-                color="#000"
-              />
-            </TouchableOpacity>
-          </View>)
+          return (<HomeHeaderButton/>)
         }, // Hide the header for the Home tab
         tabBarIcon: ({ color, size }) => (
           <Image
@@ -70,6 +78,13 @@ const HomeTabs = createBottomTabNavigator({
 
 const RootStack = createNativeStackNavigator({
   screens: {
+    Login: {
+      screen: Login,
+      options: {
+        title: 'Login',
+        headerShown: false,
+      },
+    },
     HomeTabs: {
       screen: HomeTabs,
       options: {

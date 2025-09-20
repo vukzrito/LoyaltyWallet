@@ -1,8 +1,12 @@
 // Colors
 export const COLORS = {
-  primary: '#007BFF',
-  secondary: '#6c757d',
+  primary: '#6200ee',
+  secondary: '#03dac4',
   success: '#28a745',
+  background: "#f6f6f6",
+  surface: "#ffffff",
+  text: "#000000",
+  border: "#e6e6e6",
   danger: '#dc3545',
   warning: '#ffc107',
   info: '#17a2b8',
@@ -13,7 +17,7 @@ export const COLORS = {
   gray: {
     100: '#f8f9fa',
     200: '#e9ecef',
-    300: '#dee2e6',
+    300: '#dee2e6', 
     400: '#ced4da',
     500: '#adb5bd',
     600: '#6c757d',

@@ -22,7 +22,12 @@ It includes the following:
 
 2. Edit the `app.json` file to configure the `name`, `slug`, `scheme` and bundle identifiers (`ios.bundleIdentifier` and `android.bundleIdentifier`) for your app.
 
-3. Edit the `src/App.tsx` file to start working on your app.
+3. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Update `.env` with your actual Firebase credentials
+   - Never commit `.env` to version control
+
+4. Edit the `src/App.tsx` file to start working on your app.
 
 ## Running the app
 

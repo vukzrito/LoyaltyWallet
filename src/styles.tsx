@@ -18,9 +18,9 @@ const Styles = StyleSheet.create({
   // Primary button (default)
   button: {
     backgroundColor: COLORS.primary,
-    paddingVertical: SPACING.sm,
+    paddingVertical: 12,
     paddingHorizontal: SPACING.md,
-    borderRadius: BORDER_RADIUS.md,
+    borderRadius: BORDER_RADIUS.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },
