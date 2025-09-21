@@ -4,6 +4,32 @@ import { View } from 'react-native';
 
 /* Based on JsBarcode's svg.js etc. */
 
+export interface BarcodeOptions {
+    width: number;
+    height: number;
+    format: string; // e.g., "CODE128", "UPC", "EAN13", "auto"
+    displayValue: boolean;
+    fontOptions: 'bold' | 'normal' | 'italic';
+    font: string; // e.g., "monospace", "sans-serif", "arial"
+    text?: string; // Optional text to display instead of the value
+    textAlign: 'left' | 'center' | 'right';
+    textPosition: 'top' | 'bottom';
+    textMargin: number;
+    fontSize: number;
+    background: string; // CSS color, e.g., "#ffffff"
+    lineColor: string; // CSS color, e.g., "#000000"
+    margin?: number;
+    marginTop?: number; // Optional, overrides margin
+    marginBottom?: number; // Optional, overrides margin
+    marginLeft?: number; // Optional, overrides margin
+    marginRight?: number; // Optional, overrides margin
+    /**
+     * A callback function that is triggered when the barcode's validity changes.
+     * @param isValid - A boolean indicating if the generated barcode is valid.
+     */
+    valid?: (isValid: boolean) => void;
+}
+
 const merge = (old: any, replaceObj: any) => ({ ...old, ...replaceObj });
 
 function getEncodingHeight(encoding: any, options: any) {
@@ -150,7 +176,7 @@ function BarcodeChunk(props: any) {
     });
 }
 
-function BarcodeText(props) {
+function BarcodeText(props: { text: string, width: number, padding: number, options: any & { textMargin: number, height: number, displayValue: number } }) {
     const { text, width, padding, options } = props;
 
     // Draw the text if displayValue is set
@@ -194,7 +220,7 @@ function BarcodeText(props) {
     }
 }
 
-export function Barcode({ value, options }) {
+export function Barcode({ value, options }: { value: string; options: Partial<BarcodeOptions> }) {
     let barcode = {} as any;
 
     JSBarcode(barcode, value, options);
@@ -233,7 +259,7 @@ export function Barcode({ value, options }) {
     encodings.forEach(e => xs.push(xs[xs.length - 1] + e.width));
 
     return (
-        <View style={{backgroundColor:'white',}}>
+        <View style={{ backgroundColor: 'white', }}>
             <Svg
                 x={0}
                 y={0}

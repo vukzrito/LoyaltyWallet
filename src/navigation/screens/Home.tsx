@@ -1,10 +1,10 @@
 import { Text } from '@react-navigation/elements';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { } from 'react-native-gesture-handler';
 import { Card } from '../../model/card';
 import { ListItemCard } from '../../components/list-item-card';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { CardsService } from '../../service/cards.service';
 import { AuthService } from '../../service/auth.service';
 import { COLORS } from '../../constants';
@@ -14,18 +14,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export function Home() {
   const [cards, setCards] = useState<Card[]>([]);
   const navigation = useNavigation();
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (!user) {
-      navigation.navigate('Login' as never);
-      return;
-    }
-    CardsService.getCards().then(c => setCards(c))
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      const user = AuthService.getCurrentUser();
+      if (!user) {
+        navigation.navigate('Login' as never);
+        return;
+      }
+      CardsService.getCards().then(c => setCards(c))
+    }, [navigation])
+  )
   return (
     <View style={styles.container}>
-     
-      <FlatList style={{ flex: 1 }} numColumns={2} data={cards} renderItem={({ item }) => <ListItemCard card={item} />} />
+
+      <FlatList style={{ flex: 1 }} numColumns={2} data={cards}
+        renderItem={({ item, index }) => <ListItemCard card={item} isLastOddItem={index === cards.length - 1 && cards.length % 2 == 1} />} />
     </View>
   );
 }

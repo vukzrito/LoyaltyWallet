@@ -116,7 +116,10 @@ const RootStack = createNativeStackNavigator({
       }),
     },
     CardDetails: {
-      screen: CardDetail
+      screen: CardDetail,options:({ route }) => ({
+        title: "Card",
+      })
+
     },
     StoreLookup: {
       screen: StoreLookupList
