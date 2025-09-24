@@ -1,22 +1,26 @@
-import React, { useCallback, useMemo } from 'react';
-import { Text, TouchableOpacity, StyleSheet, ViewStyle, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Text, TouchableOpacity, StyleSheet, ViewStyle, View, Image, ImageStyle } from 'react-native';
 import { Card } from '../model/card';
-import { useNavigation } from '@react-navigation/native';
 import { COLORS, SPACING, BORDER_RADIUS, FONT_SIZE, FONT_WEIGHT, SHADOWS } from '../constants';
 
 interface ListItemCardProps {
   card: Card;
   isLastOddItem?: boolean;
+  style?: ViewStyle;
+  imageStyle?: ImageStyle;
+  onPress?: () => void;
 }
 
-export const ListItemCard: React.FC<ListItemCardProps> = ({ card, isLastOddItem }) => {
-  const navigation = useNavigation();
+export const ListItemCard: React.FC<ListItemCardProps> = ({ card, isLastOddItem, style, imageStyle, onPress }) => {
+  const onCardPress = () => {
+    if (onPress){
+      onPress();
+    }else{
+      console.warn("No onPress handler provided for ListItemCard");
+    }
+  }
 
-  const onPress = useCallback(() => {
-    navigation.navigate('CardDetails', { card });
-  }, [navigation, card.id]);
-
-  const cardStyle = useMemo((): ViewStyle => ({
+  const cardStyle = useMemo((): ViewStyle => (StyleSheet.flatten([{
     flex: 1,
     backgroundColor: card.color,
     borderRadius: BORDER_RADIUS.md,
@@ -26,11 +30,19 @@ export const ListItemCard: React.FC<ListItemCardProps> = ({ card, isLastOddItem 
     paddingVertical: SPACING.xl,
     margin: SPACING.sm,
     ...SHADOWS.md,
-  }), [card.color]);
-
+  }, style])
+  ), [card.color]);
+  const imageStyles = useMemo((): ImageStyle => (StyleSheet.flatten([{
+    width: '100%', height: 50, resizeMode: 'contain'
+  }, imageStyle])
+  ), [imageStyle]);
   return (<>
-    <TouchableOpacity onPress={onPress} style={cardStyle}>
-      <Text style={styles.cardTitle}>{card.title}</Text>
+    <TouchableOpacity onPress={onCardPress} style={cardStyle}>
+
+
+      {card.image ? <Image source={{ uri: card.image }} style={imageStyles} /> :
+        <Text style={styles.cardTitle}>{card.title}</Text>}
+
     </TouchableOpacity>
     {isLastOddItem ? <View style={styles.placeHolder} /> : null}
   </>
@@ -43,8 +55,11 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.md,
     fontWeight: FONT_WEIGHT.semibold,
     textAlign: 'center',
+    paddingVertical: SPACING.md,
   },
-  placeHolder:{ flex: 1, padding: SPACING.md,
+  placeHolder: {
+    flex: 1, padding: SPACING.md,
     paddingVertical: SPACING.xl,
-    margin: SPACING.sm, }
+    margin: SPACING.sm,
+  }
 });

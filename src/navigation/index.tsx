@@ -6,7 +6,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image, Touchable, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import bell from '../assets/bell.png';
 import newspaper from '../assets/newspaper.png';
 import { Home } from './screens/Home';
@@ -21,20 +21,20 @@ import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import { StoreLookupList } from './screens/StoreLookupList';
 import { COLORS } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-const HomeHeaderButton=()=>{
+const HomeHeaderButton = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   return (
-    <View style={{paddingTop: insets.top,backgroundColor: COLORS.white}}>
-    <TouchableOpacity
-      style={{ padding: 16,paddingTop:0,alignItems: 'flex-end' }}
-      onPress={() => navigation.navigate('StoreLookup',)}>
-      <AntDesignIcon
-        name="pluscircle"
-        size={32}
-        color={COLORS.primary}
-      />
-    </TouchableOpacity></View>
+    <View style={{ paddingTop: insets.top, backgroundColor: COLORS.white }}>
+      <TouchableOpacity
+        style={{ padding: 16, paddingTop: 0, alignItems: 'flex-end' }}
+        onPress={() => navigation.navigate('StoreLookup',)}>
+        <AntDesignIcon
+          name="pluscircle"
+          size={32}
+          color={COLORS.primary}
+        />
+      </TouchableOpacity></View>
   )
 }
 const HomeTabs = createBottomTabNavigator({
@@ -44,7 +44,7 @@ const HomeTabs = createBottomTabNavigator({
       options: {
         header: () => {
           const navigation = useNavigation();
-          return (<HomeHeaderButton/>)
+          return (<HomeHeaderButton />)
         }, // Hide the header for the Home tab
         tabBarIcon: ({ color, size }) => (
           <Image
@@ -116,13 +116,17 @@ const RootStack = createNativeStackNavigator({
       }),
     },
     CardDetails: {
-      screen: CardDetail,options:({ route }) => ({
+      screen: CardDetail, options: ({ route }) => ({
         title: "Card",
       })
 
     },
     StoreLookup: {
-      screen: StoreLookupList
+      screen: StoreLookupList,
+      options: ({ navigation }) => ({
+        title: 'Stores',
+      
+      }),
     },
     AddCard: {
       screen: AddCard,

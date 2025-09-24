@@ -15,8 +15,7 @@ export type CardDetailProps = StaticScreenProps<{
 export const CardDetail = ({ route }: CardDetailProps) => {
     const { card } = route.params;
     const navigation = useNavigation();
-    // Here you would typically fetch the card details using the cardId
-    // For demonstration, we'll use a static object
+
     useEffect(() => {
         console.log("Card details:", card);
         navigation.setOptions({
@@ -39,15 +38,12 @@ export const CardDetail = ({ route }: CardDetailProps) => {
     const getBarcodeFormat = (cardNumber: string) => {
         // Simple heuristic to determine barcode format based on card number length
         const length = cardNumber.replace(/\s/g, '').length; // Remove spaces for accurate length
-        if (length === 12) return 'CODE39'; // Example: Membership cards
-        if (length === 13) return 'EAN13'; // Example: Retail cards
-        if (length === 16) return 'CODE128'; // Example: Credit/Debit cards
-        return 'CODE128'; // Default format
+        return length % 2 === 0 ? 'CODE128C' : 'CODE128B'; // Default format
     }
     return (
         <View style={{ backgroundColor: card.color, padding: 16, margin: 16, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ fontSize: 24, color: '#fff' }}>{card.title}</Text>
-            {/* <Image source={{ uri: card.image }} style={{ width: '100%', height: 200 }} /> */}
+            {!!card.image && <Image source={{ uri: card.image }} style={{ width: '100%', height: 50, resizeMode: 'contain' }} />}
             <Barcode
                 value={card.cardNumber.replace(/\s/g, '')} // Remove spaces for barcode
                 options={{ format: getBarcodeFormat(card.cardNumber), background: 'white' }}

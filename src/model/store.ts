@@ -4,4 +4,5 @@ export interface Store {
   backgroundColor: string;
   textColor: string;
   logoUrl?: string;
+  categories?: string[];
 }

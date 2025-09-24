@@ -28,7 +28,9 @@ export function Home() {
     <View style={styles.container}>
 
       <FlatList style={{ flex: 1 }} numColumns={2} data={cards}
-        renderItem={({ item, index }) => <ListItemCard card={item} isLastOddItem={index === cards.length - 1 && cards.length % 2 == 1} />} />
+        renderItem={({ item, index }) => <ListItemCard card={item}
+          onPress={() => navigation.navigate('CardDetails', { card: item })}
+          isLastOddItem={index === cards.length - 1 && cards.length % 2 == 1} />} />
     </View>
   );
 }

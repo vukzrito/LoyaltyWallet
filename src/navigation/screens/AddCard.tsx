@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GlobalStyles from "../../styles";
 import { Button } from "../../components/button";
@@ -18,17 +18,23 @@ export const AddCard = ({ route }: Props) => {
     const onSaveCard = useCallback(async () => {
         // Logic to save the card number
         console.log('Card Number Saved:', cardNumber);
+        const uniqueId = new Date().getTime().toString(36).substring(2, 15) // Generate a random ID
         const card: Card = {
             cardNumber: cardNumber,
             color: store.backgroundColor,
             title: store.name,
-            id: Math.random().toString(36).substring(2, 15), // Generate a random ID
+            id: uniqueId,
             image: store.logoUrl, // Placeholder for image URL
         };
         await CardsService.addCard(card);
-        navigation.navigate('HomeTabs', { screen: 'Home', pop:true });
+        navigation.navigate('HomeTabs', { screen: 'Home', pop: true });
     }, [cardNumber]);
 
+    useEffect(() => {
+        navigation.setOptions({
+            title: store.name,
+        })
+    });
     return (
         <View style={GlobalStyles.container
 
