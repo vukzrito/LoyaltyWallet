@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import GlobalStyles from "../../styles";
-import { Button } from "../../components/button";
-import { Card } from "../../model/card";
+import GlobalStyles from "../../../styles";
+import { Button } from "../../../components/button";
+import { Card } from "../../../model/card";
 import { StaticScreenProps, useNavigation } from "@react-navigation/native";
-import { Store } from "../../model/store";
-import { CardsService } from "../../service/cards.service";
+import { Store } from "../../../model/store";
+import { CardsService } from "../../../service/cards.service";
 
 type Props = StaticScreenProps<{
     store: Store;

@@ -1,9 +1,9 @@
 import { FlatList, View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
-import { Store } from "../../model/store";
+import { Store } from "../../../model/store";
 import { useNavigation } from "@react-navigation/native";
-import { ListItemCard } from "../../components/list-item-card";
+import { ListItemCard } from "../../../components/list-item-card";
 import { useCallback } from "react";
-import { stores } from "../../constants/stores";
+import { stores } from "../../../constants/stores";
 
 
 export const StoreLookupList = () => {

@@ -2,11 +2,11 @@ import { StaticScreenProps, useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
-import { Barcode } from '../../components/barcode';
-import { Card } from '../../model/card';
-import { IconButton } from '../../components/icon-button';
-import { CardsService } from '../../service/cards.service';
-import { COLORS } from '../../constants';
+import { Barcode } from '../../../components/barcode';
+import { Card } from '../../../model/card';
+import { IconButton } from '../../../components/icon-button';
+import { CardsService } from '../../../service/cards.service';
+import { COLORS } from '../../../constants';
 
 export type CardDetailProps = StaticScreenProps<{
     card: Card

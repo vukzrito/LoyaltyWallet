@@ -2,12 +2,12 @@ import { Text } from '@react-navigation/elements';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { } from 'react-native-gesture-handler';
-import { Card } from '../../model/card';
-import { ListItemCard } from '../../components/list-item-card';
+import { Card } from '../../../model/card';
+import { ListItemCard } from '../../../components/list-item-card';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { CardsService } from '../../service/cards.service';
-import { AuthService } from '../../service/auth.service';
-import { COLORS } from '../../constants';
+import { CardsService } from '../../../service/cards.service';
+import { AuthService } from '../../../service/auth.service';
+import { COLORS } from '../../../constants';
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import { SafeAreaView } from 'react-native-safe-area-context';
 

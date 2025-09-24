@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components/button';
-import GlobalStyles from '../../styles';
-import { AuthService } from '../../service/auth.service';
-import { COLORS } from '../../constants';
+import { Button } from '../../../components/button';
+import GlobalStyles from '../../../styles';
+import { AuthService } from '../../../service/auth.service';
+import { COLORS } from '../../../constants';
 
 export function Login() {
   const navigation = useNavigation();

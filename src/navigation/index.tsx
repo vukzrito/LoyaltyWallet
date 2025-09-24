@@ -9,16 +9,18 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image, TouchableOpacity, View } from 'react-native';
 import bell from '../assets/bell.png';
 import newspaper from '../assets/newspaper.png';
-import { Home } from './screens/Home';
-import { Profile } from './screens/Profile';
-import { Settings } from './screens/Settings';
-import { Updates } from './screens/Updates';
-import { NotFound } from './screens/NotFound';
-import { Login } from './screens/Login';
-import { CardDetail } from './screens/CardDetail';
-import { AddCard } from './screens/AddCard';
+import { 
+  Home, 
+  Profile, 
+  Settings, 
+  Updates, 
+  NotFound, 
+  Login, 
+  CardDetail, 
+  AddCard, 
+  StoreLookupList 
+} from './screens';
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
-import { StoreLookupList } from './screens/StoreLookupList';
 import { COLORS } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const HomeHeaderButton = () => {
@@ -73,7 +75,13 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
+    Settings: {
+      screen: Settings, options: {
+        tabBarIcon: ({ color, size }) => <AntDesignIcon name="setting" color={color} size={size} />
+      }
+    }
   },
+
 });
 
 const RootStack = createNativeStackNavigator({
@@ -104,17 +112,7 @@ const RootStack = createNativeStackNavigator({
         },
       },
     },
-    Settings: {
-      screen: Settings,
-      options: ({ navigation }) => ({
-        presentation: 'modal',
-        headerRight: () => (
-          <HeaderButton onPress={navigation.goBack}>
-            <Text>Close</Text>
-          </HeaderButton>
-        ),
-      }),
-    },
+
     CardDetails: {
       screen: CardDetail, options: ({ route }) => ({
         title: "Card",
@@ -125,7 +123,7 @@ const RootStack = createNativeStackNavigator({
       screen: StoreLookupList,
       options: ({ navigation }) => ({
         title: 'Stores',
-      
+
       }),
     },
     AddCard: {
