@@ -84,8 +84,9 @@ export const stores: Store[] = [
     id: "7",
     name: "Game",
     categories: [categories.groceries, categories.liquor],
-    backgroundColor: "#cf008d",
-    textColor: "#ffffff",
+    backgroundColor: "#ffffff",
+    textColor: "#cf008d",
+    logoUrl:"https://res.cloudinary.com/dgsqgajl7/image/upload/v1758843686/game_ftis0z.png"
   },
   {
     id: "8",
@@ -168,7 +169,7 @@ export const stores: Store[] = [
     backgroundColor: "#000",
     textColor: "#fff",
     logoUrl:
-      "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758735612/RedT_Norman_Goodfellows_Project-19_elcsez.jpg",
+      "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758843499/RedT_Norman_Goodfellows_Project-19_ssx7e7.jpg",
   },
   {
     id: "17",
@@ -196,5 +197,36 @@ export const stores: Store[] = [
     textColor: "#0033a0",
     logoUrl:
       "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758745772/boxer2_erzpei.png",
+  },{
+    id: "20",
+    name: "BP",
+    categories: [categories.fuel],
+    backgroundColor: "#fff",
+    textColor: "#e60000",
+    logoUrl:
+      "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758840342/bp_izfggp.png",
+  },{
+    id: "21",
+    name: "Ok",
+    categories: [categories.groceries, categories.liquor],
+    backgroundColor: "#dd3333",
+    textColor: "#fff",
+    logoUrl:
+      "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758840342/ok_gfpf0x.png",
+  },{
+    id: "22",
+    name: "OBC",
+    categories: [categories.groceries],
+    backgroundColor: "#000",
+    textColor: "#e60000",
+    logoUrl:
+      "https://res.cloudinary.com/dgsqgajl7/image/upload/v1758842845/OBC_p3rqxi.png",
+  },{
+    id:"23",
+    name:"Ster Kineko (SK)",
+    categories:[categories.entertainment],
+    backgroundColor:"#000",
+    textColor:"#fff",
+    logoUrl:"https://res.cloudinary.com/dgsqgajl7/image/upload/v1758844168/sk_sc8vhg.jpg"
   }
 ];
