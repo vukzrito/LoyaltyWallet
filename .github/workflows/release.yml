@@ -18,6 +18,11 @@ on:
         required: true
         default: true
         type: boolean
+      debug:
+        description: 'Log all environment variables (for debugging)'
+        required: true
+        default: false
+        type: boolean
   push:
     branches:
       - main
@@ -46,6 +51,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Log all environment variables
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: env | sort
 
       - name: Decode signing keystore
         shell: bash
