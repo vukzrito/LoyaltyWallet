@@ -29,6 +29,8 @@ on:
 
 jobs:
   build-and-publish:
+    environment:
+      name: Production
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -53,7 +55,7 @@ jobs:
         run: npm ci
 
       - name: Log all environment variables
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' && format('{0}', github.event.inputs.debug) == 'true'
         shell: bash
         run: env | sort
 
@@ -100,7 +102,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload to Google Play
-        if: github.event.inputs.publish == 'true'
+        if: format('{0}', github.event.inputs.publish) == 'true'
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
