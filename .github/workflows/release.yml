@@ -48,12 +48,36 @@ jobs:
         run: npm ci
 
       - name: Decode signing keystore
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
-          echo "storeFile=release.keystore" > android/keystore.properties
-          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/keystore.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/keystore.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/keystore.properties
+          if [ -z "${ANDROID_KEYSTORE_BASE64}" ]; then
+            echo "::error::Secret ANDROID_KEYSTORE_BASE64 is not set" && exit 1
+          fi
+          printf '%s' "${ANDROID_KEYSTORE_BASE64}" | tr -d ' \r\n' | base64 -d > android/app/release.keystore
+          {
+            echo "storeFile=release.keystore"
+            echo "storePassword=${KEYSTORE_PASSWORD}"
+            echo "keyAlias=${KEY_ALIAS:-loyaltywallet}"
+            echo "keyPassword=${KEY_PASSWORD:-${KEYSTORE_PASSWORD}}"
+          } > android/keystore.properties
+
+      - name: Verify signing keystore
+        shell: bash
+        run: |
+          ALIAS=$(grep keyAlias android/keystore.properties | cut -d= -f2)
+          PASSWORD=$(grep storePassword android/keystore.properties | cut -d= -f2)
+          if ! keytool -list -keystore android/app/release.keystore \
+              -storetype PKCS12 -storepass "${PASSWORD}" -alias "${ALIAS}" > /dev/null 2>&1; then
+            echo "::error::Decoded keystore is corrupt or the KEYSTORE_PASSWORD/KEY_ALIAS secrets are wrong."
+            echo "Regenerate ANDROID_KEYSTORE_BASE64 with: base64 -i android/app/release.keystore | tr -d '\\n' | pbcopy"
+            exit 1
+          fi
+          echo "Keystore verified: alias=${ALIAS}"
 
       - name: Build release AAB
         run: cd android && ./gradlew bundleRelease
