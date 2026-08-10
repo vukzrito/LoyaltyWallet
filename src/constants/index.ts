@@ -1,29 +1,34 @@
-// Colors
+// Colors — modern wallet palette
 export const COLORS = {
-  primary: '#6200ee',
-  secondary: '#03dac4',
-  success: '#28a745',
-  background: "#f6f6f6",
-  surface: "#ffffff",
-  text: "#000000",
-  border: "#e6e6e6",
-  danger: '#dc3545',
-  warning: '#ffc107',
-  info: '#17a2b8',
-  light: '#f8f9fa',
-  dark: '#343a40',
-  white: '#ffffff',
+  primary: '#6366F1',
+  primaryDark: '#4F46E5',
+  primaryLight: '#EEF2FF',
+  secondary: '#14B8A6',
+  success: '#22C55E',
+  background: '#F8FAFC',
+  surface: '#FFFFFF',
+  text: '#0F172A',
+  textSecondary: '#64748B',
+  textMuted: '#94A3B8',
+  border: '#E2E8F0',
+  borderLight: '#F1F5F9',
+  danger: '#EF4444',
+  warning: '#F59E0B',
+  info: '#3B82F6',
+  light: '#F8FAFC',
+  dark: '#1E293B',
+  white: '#FFFFFF',
   black: '#000000',
   gray: {
-    100: '#f8f9fa',
-    200: '#e9ecef',
-    300: '#dee2e6', 
-    400: '#ced4da',
-    500: '#adb5bd',
-    600: '#6c757d',
-    700: '#495057',
-    800: '#343a40',
-    900: '#212529',
+    100: '#F1F5F9',
+    200: '#E2E8F0',
+    300: '#CBD5E1',
+    400: '#94A3B8',
+    500: '#64748B',
+    600: '#475569',
+    700: '#334155',
+    800: '#1E293B',
+    900: '#0F172A',
   },
 } as const;
 
@@ -39,10 +44,11 @@ export const SPACING = {
 
 // Border radius
 export const BORDER_RADIUS = {
-  sm: 4,
-  md: 8,
-  lg: 12,
-  xl: 16,
+  sm: 6,
+  md: 10,
+  lg: 14,
+  xl: 20,
+  xxl: 28,
   round: 50,
 } as const;
 
@@ -52,49 +58,40 @@ export const FONT_SIZE = {
   sm: 14,
   md: 16,
   lg: 18,
-  xl: 20,
-  xxl: 24,
-  xxxl: 32,
+  xl: 22,
+  xxl: 28,
+  xxxl: 34,
 } as const;
 
 // Font weights
 export const FONT_WEIGHT = {
-  normal: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-} as const;
+  normal: '400' as const,
+  medium: '500' as const,
+  semibold: '600' as const,
+  bold: '700' as const,
+};
 
 // Shadow styles
 export const SHADOWS = {
   sm: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+    elevation: 2,
   },
   md: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
   },
   lg: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
+    shadowColor: '#64748B',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
     elevation: 8,
   },
 } as const;
@@ -104,4 +101,4 @@ export const ANIMATION = {
   fast: 200,
   normal: 300,
   slow: 500,
-} as const; 
+} as const;

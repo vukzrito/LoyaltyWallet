@@ -13,39 +13,44 @@ interface ListItemCardProps {
 
 export const ListItemCard: React.FC<ListItemCardProps> = ({ card, isLastOddItem, style, imageStyle, onPress }) => {
   const onCardPress = () => {
-    if (onPress){
+    if (onPress) {
       onPress();
-    }else{
+    } else {
       console.warn("No onPress handler provided for ListItemCard");
     }
-  }
+  };
 
   const cardStyle = useMemo((): ViewStyle => (StyleSheet.flatten([{
     flex: 1,
     backgroundColor: card.color,
-    borderRadius: BORDER_RADIUS.md,
+    borderRadius: BORDER_RADIUS.lg,
     alignItems: 'center',
     justifyContent: 'center',
     padding: SPACING.md,
-    paddingVertical: SPACING.xl,
+    minHeight: 120,
     margin: SPACING.sm,
     ...SHADOWS.md,
   }, style])
-  ), [card.color]);
+  ), [card.color, style]);
+
   const imageStyles = useMemo((): ImageStyle => (StyleSheet.flatten([{
-    width: '100%', height: 50, resizeMode: 'contain'
+    width: '100%',
+    height: 50,
+    resizeMode: 'contain',
   }, imageStyle])
   ), [imageStyle]);
-  return (<>
-    <TouchableOpacity onPress={onCardPress} style={cardStyle}>
 
-
-      {card.image ? <Image source={{ uri: card.image }} style={imageStyles} /> :
-        <Text style={styles.cardTitle}>{card.title}</Text>}
-
-    </TouchableOpacity>
-    {isLastOddItem ? <View style={styles.placeHolder} /> : null}
-  </>
+  return (
+    <>
+      <TouchableOpacity onPress={onCardPress} style={cardStyle} activeOpacity={0.85}>
+        {card.image ? (
+          <Image source={{ uri: card.image }} style={imageStyles} />
+        ) : (
+          <Text style={styles.cardTitle}>{card.title}</Text>
+        )}
+      </TouchableOpacity>
+      {isLastOddItem ? <View style={styles.placeHolder} /> : null}
+    </>
   );
 };
 
@@ -58,8 +63,9 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.md,
   },
   placeHolder: {
-    flex: 1, padding: SPACING.md,
-    paddingVertical: SPACING.xl,
+    flex: 1,
+    padding: SPACING.md,
+    minHeight: 120,
     margin: SPACING.sm,
-  }
+  },
 });

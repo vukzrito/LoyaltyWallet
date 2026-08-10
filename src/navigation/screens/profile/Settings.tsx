@@ -42,7 +42,7 @@ const SettingItem = ({ icon, title, subtitle, onPress, rightElement, showArrow =
   return (
     <TouchableOpacity style={styles.settingItem} onPress={onPress} disabled={!onPress}>
       <View style={styles.settingLeft}>
-        <View style={styles.iconContainer}>
+        <View style={[styles.iconContainer, !showArrow && styles.iconContainerLarge]}>
           {icon}
         </View>
         <View style={styles.textContainer}>
@@ -177,6 +177,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderRadius: BORDER_RADIUS.lg,
     overflow: 'hidden',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: COLORS.border,
   },
   settingItem: {
     flexDirection: 'row',
@@ -192,11 +194,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iconContainer: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
     marginRight: SPACING.md,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: BORDER_RADIUS.sm,
+    backgroundColor: COLORS.gray[100],
+  },
+  iconContainerLarge: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'transparent',
   },
   profileImage: {
     width: 40,

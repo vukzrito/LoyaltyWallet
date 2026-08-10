@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import type { ReactNode } from "react";
 
 interface IconButtonProps {
@@ -6,13 +6,19 @@ interface IconButtonProps {
     onPress?: () => void;
 }
 
-export const IconButton = ({ children , onPress}: IconButtonProps) => {
-    return <TouchableOpacity style={{
-        padding: 10,
-        borderRadius: 5,
+export const IconButton = ({ children, onPress }: IconButtonProps) => {
+    return (
+        <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={onPress}>
+            {children}
+        </TouchableOpacity>
+    );
+};
+
+const styles = StyleSheet.create({
+    button: {
+        padding: 8,
+        borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
-    }} onPress={onPress}>
-        {children}
-    </TouchableOpacity>;
-}
+    },
+});
