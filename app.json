@@ -10,14 +10,14 @@
     "scheme": "loyaltywallet",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.loyaltywallet"
+      "bundleIdentifier": "za.co.entuit.loyaltywallet"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.loyaltywallet"
+      "package": "za.co.entuit.loyaltywallet"
     },
     "web": {
       "favicon": "./assets/favicon.png"

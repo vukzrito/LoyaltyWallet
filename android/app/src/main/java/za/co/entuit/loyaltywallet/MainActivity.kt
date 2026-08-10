@@ -1,4 +1,4 @@
-package com.loyaltywallet
+package za.co.entuit.loyaltywallet
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
